@@ -1,13 +1,14 @@
 from bs4 import BeautifulSoup
+from selenium import webdriver
 import requests
 from openpyxl import workbook, load_workbook
-
-from selenium import webdriver
 import time
 
 driver = webdriver.Chrome()
 
-m=1028
+m=1028 # number of colleges information needed to be scraped
+
+# scrapes requied information then saves it to excel file using openpyxl
 for page_number in range(0, m):
     driver.get(f'https://www.collegesimply.com/colleges/rank/colleges/lowest-graduation-rate/?page={page_number}')
     html_text = driver.page_source
@@ -38,4 +39,5 @@ for page_number in range(0, m):
             m=m+1
             wb.save(file_path)
         except:
+
             pass
