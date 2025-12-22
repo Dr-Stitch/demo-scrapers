@@ -5,9 +5,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
 import pandas as pd
-# from openpyxl import Workbook, load_workbook
-# from openpyxl.utils import get_column_letter as cell
 
+# function that gets the elements and targeted information
 def search(driver, value):
           try:
                     full_input_box = driver.find_element(By.XPATH, '/html/body/div[2]/form/div[3]/div[2]/section/div/div/div/div/div[3]')
@@ -33,11 +32,10 @@ def search(driver, value):
           except:
                   pass
           
-          
-          
+
+# Initiating webdriver
 website = 'https://www.stratahub.nsw.gov.au/prweb/PRAuth/app/ssr_4380/mashup/!SchemeSearch/?pzuiactionzzz=CXtpbn15a2gyQTl4dnV4YlN5TzhpbE5uYU1ielJHYmsxUVc0Nk9nR2Y0dmFtT1hldkQya0JnNi9Wc2dCK3hQOWJ0VytoZUZnTnd0YTdTc2M5TVZ4Sjh0Z1JMWXJWTEFBc3Q0cUlScEs3eEFyR3VwQkZvSkV0eUZSSVQ1Tm9IREx1bi9ZUERyd3UrQjBCc3BTSmk4em9zKzhkSGptNm9hSXBBb012bXRQTzVXK0lERHpNVVMzRmtCUHhMY3gyN1NFWSt2Z2l4cHFSMHZQRmFZQTVCSzFFSjNpcnBTZ3VXUHlzNGxPWTB2U2hPZDVLSm1vYlVYZUNxL3JQYjhaOVJBeThHUzFseU9VRDdENXV3aU9PaVN6TktTQ2JrTWkwZVd1UG55a29aSHh6V1V5YWhTSUxLbmY5SmF1ZVZZSEpIT1dnRTY5QlBnaHc3SzhjbGVRcDBaL3FvK3ovMlhhZVJSWkJHSW4xSXZJQTdmYktUVVpTRWs1V3JtYmE1NXduL3BrRmdSTEx4b2pwOXlSanFSMjdoT1ArRVlxWnBBPT0%3D*'
 driver = webdriver.Edge()
-# driver.maximize_window()
 driver.get(website)
 
 options = Options()  # Initialize an instance of the Options class
@@ -53,8 +51,10 @@ index = []
 address=[]
 space=[]
 date=[]
-for i in range(3885,120000):
+for i in range(0,120000):
         search(driver, i)
 
-# df = pd.DataFrame({'Index':index, 'Addess': address, 'Space': space, 'Registered on': date})
-# df.to_excel('nsw.gov.xlsx', index=False)
+# Exporting Data to excel file using pandas
+df = pd.DataFrame({'Index':index, 'Addess': address, 'Space': space, 'Registered on': date})
+df.to_excel('nsw.gov.xlsx', index=False)
+
